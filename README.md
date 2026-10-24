@@ -4,7 +4,7 @@
 
 A formula-driven supplier performance scorecard in Excel. Pick a supplier and see what was ordered, total spend, items received and real delivery lead time.
 
-**Live case study:** https://osamasunaallah.github.io/ET-Supplier-Evaluation/
+**Live case study:** https://osamasunaallah.github.io/Supplier-Evaluation/
 
 ## What it does
 - Merges PO lines and cash purchases into one table
