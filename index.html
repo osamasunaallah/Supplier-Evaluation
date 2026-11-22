@@ -18,12 +18,14 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>document.documentElement.classList.add("js")</script>
 <style>
 :root{
   --bg:#FAF6F1; --paper:#FFFDFB; --bg-2:#F3EAE3; --fg:#2A0F14; --fg-soft:#4A2A30; --muted:#6E5459;
   --rule:#E6D6CD; --rule-strong:#2A0F14;
-  --wine:#7A1F35; --wine-2:#A63446; --wine-soft:#F6E3E6; --on-wine:#FFF7F5;
-  --gold:#8A6420; --gold-2:#C59A52; --gold-soft:#F5EAD6;
+  --wine:#7A1F35; --wine-2:#7A1F35; --wine-soft:#F6E3E6; --on-wine:#FFF7F5;
+  --gold:#8E4757; --gold-2:#B06A79; --gold-soft:#F6E3E6;
+  --pop:#00B89C; --on-pop:#10070A; --pop-shadow:0 12px 26px -10px rgba(0,184,156,.6);
   --ok:#2F6B4F; --ok-soft:#E1EFE7; --mid:#9A6512; --mid-soft:#F7ECD8; --bad:#A12A2A; --bad-soft:#F7E1E1;
   --band:#3B0D1A; --band-fg:#F8E9E4;
   --shadow:0 1px 0 rgba(42,15,20,.04),0 12px 32px -12px rgba(122,31,53,.18);
@@ -33,8 +35,9 @@
   :root:not([data-theme="light"]){
     --bg:#15080B; --paper:#1F0E12; --bg-2:#2A141A; --fg:#F6E9E6; --fg-soft:#E2CDCB; --muted:#B79A9E;
     --rule:#3F2228; --rule-strong:#F6E9E6;
-    --wine:#E78A9C; --wine-2:#F2AFBC; --wine-soft:#3A1720; --on-wine:#1A080C;
-    --gold:#DDB673; --gold-2:#E9C98D; --gold-soft:#3A2C14;
+    --wine:#E78A9C; --wine-2:#E78A9C; --wine-soft:#3A1720; --on-wine:#1A080C;
+    --gold:#C98593; --gold-2:#D9A1AC; --gold-soft:#3A1720;
+    --pop:#2EE6C5; --on-pop:#10070A; --pop-shadow:0 12px 28px -10px rgba(46,230,197,.5);
     --ok:#7FD1A8; --ok-soft:#163327; --mid:#F0C26A; --mid-soft:#3A2C14; --bad:#F59A9A; --bad-soft:#3E1818;
     --band:#0E0507; --band-fg:#F8E9E4; --shadow:0 18px 40px -16px rgba(0,0,0,.6);
   }
@@ -42,8 +45,9 @@
 :root[data-theme="dark"]{
   --bg:#15080B; --paper:#1F0E12; --bg-2:#2A141A; --fg:#F6E9E6; --fg-soft:#E2CDCB; --muted:#B79A9E;
   --rule:#3F2228; --rule-strong:#F6E9E6;
-  --wine:#E78A9C; --wine-2:#F2AFBC; --wine-soft:#3A1720; --on-wine:#1A080C;
-  --gold:#DDB673; --gold-2:#E9C98D; --gold-soft:#3A2C14;
+  --wine:#E78A9C; --wine-2:#E78A9C; --wine-soft:#3A1720; --on-wine:#1A080C;
+  --gold:#C98593; --gold-2:#D9A1AC; --gold-soft:#3A1720;
+  --pop:#2EE6C5; --on-pop:#10070A; --pop-shadow:0 12px 28px -10px rgba(46,230,197,.5);
   --ok:#7FD1A8; --ok-soft:#163327; --mid:#F0C26A; --mid-soft:#3A2C14; --bad:#F59A9A; --bad-soft:#3E1818;
   --band:#0E0507; --band-fg:#F8E9E4; --shadow:0 18px 40px -16px rgba(0,0,0,.6);
 }
@@ -55,16 +59,16 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 Switzer,system
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 :focus-visible{outline:2px solid var(--wine);outline-offset:3px}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:12px;background:var(--paper);padding:8px 12px;z-index:99}
-.label{font:500 11.5px "IBM Plex Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.label{font:500 14px Switzer,system-ui,sans-serif;color:var(--muted)}
 a{color:var(--wine)}
 
 /* masthead */
-.mast{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);transition:box-shadow .3s}
+.mast{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--rule);transition:box-shadow .3s}
 .mast.scrolled{box-shadow:0 8px 24px -18px rgba(42,15,20,.5)}
 .mast-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:62px;gap:16px}
 .mast .issue{justify-self:start}
 .mast .title{font:700 20px "EB Garamond",serif;letter-spacing:.01em;color:var(--fg);text-decoration:none;white-space:nowrap}
-.mast .title i{color:var(--wine);font-style:italic}
+.mast .title i{color:var(--wine);font-style:normal}
 .mast-r{justify-self:end;display:flex;gap:6px;align-items:center}
 .mast-r a{font:500 13px Switzer;color:var(--fg-soft);text-decoration:none;padding:8px 10px;position:relative}
 .mast-r a::after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:1px;background:var(--wine);transform:scaleX(0);transform-origin:right;transition:transform .25s var(--ease)}
@@ -78,9 +82,9 @@ a{color:var(--wine)}
 /* cover */
 .cover{padding:64px 0 40px;text-align:center;position:relative;overflow:hidden}
 .cover .label{display:inline-flex;gap:14px;align-items:center}
-.cover .label::before,.cover .label::after{content:"";width:40px;height:1px;background:var(--gold-2)}
+
 .cover h1{font:800 clamp(44px,8vw,104px)/.95 "EB Garamond",serif;letter-spacing:-.03em;margin:22px auto 18px;max-width:14ch}
-.cover h1 em{font-style:italic;font-weight:600;color:var(--wine)}
+.cover h1 em{font-style:normal;color:var(--wine)}
 .cover h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
 .cover h1 .w>span,.cover h1 .w>em>span{display:inline-block;transform:translateY(105%);animation:up 1s var(--ease) forwards}
 @keyframes up{to{transform:none}}
@@ -91,7 +95,7 @@ a{color:var(--wine)}
 .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;font:600 14.5px Switzer;text-decoration:none;border:1px solid var(--rule-strong);color:var(--fg);background:transparent;cursor:pointer;position:relative;overflow:hidden;transition:color .25s var(--ease)}
 .btn::before{content:"";position:absolute;inset:0;background:var(--wine);transform:translateY(101%);transition:transform .3s var(--ease);z-index:-1}
 .btn:hover{color:var(--on-wine);border-color:var(--wine)}.btn:hover::before{transform:none}
-.btn.solid{background:var(--wine);color:var(--on-wine);border-color:var(--wine)}
+.btn.solid{background:var(--pop);color:var(--on-pop);border-color:var(--pop);box-shadow:var(--pop-shadow)}
 .btn.solid::before{background:var(--fg)}
 .btn svg{width:17px;height:17px}
 
@@ -101,9 +105,9 @@ a{color:var(--wine)}
 .figure .gauge-col{padding:26px;border-right:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
 .gauge{width:170px;height:170px}
 .gauge .t{fill:none;stroke:var(--bg-2);stroke-width:12}
-.gauge .v{fill:none;stroke:url(#gw);stroke-width:12;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:452;stroke-dashoffset:452;transition:stroke-dashoffset 1.6s var(--ease)}
+.gauge .v{fill:none;stroke:var(--wine);stroke-width:12;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:452;stroke-dashoffset:452;transition:stroke-dashoffset 1.6s var(--ease)}
 .gauge text{font:700 34px "EB Garamond",serif;fill:var(--fg)}
-.gauge .sub{font:500 9px "IBM Plex Mono";letter-spacing:.14em;fill:var(--muted)}
+.gauge .sub{font:500 9px "IBM Plex Mono";fill:var(--muted)}
 .board{padding:18px 24px}
 .board-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rule-strong);padding-bottom:8px;margin-bottom:4px}
 .board-h b{font:700 18px "EB Garamond",serif}
@@ -112,7 +116,7 @@ a{color:var(--wine)}
 .lb .n{font:600 13px "IBM Plex Mono";color:var(--muted)}
 .lb .nm{font-weight:600;font-size:14.5px}
 .lb .bar{height:8px;background:var(--bg-2);border-radius:8px;overflow:hidden}
-.lb .bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--wine),var(--wine-2));transform-origin:left;animation:barg 1.2s var(--ease) both}
+.lb .bar i{display:block;height:100%;border-radius:8px;background:var(--wine);transform-origin:left;animation:barg 1.2s var(--ease) both}
 @keyframes barg{from{transform:scaleX(0)}}
 .lb .d{font:600 13px "IBM Plex Mono";text-align:right}
 @media (max-width:760px){.figure{grid-template-columns:1fr}.figure .gauge-col{border-right:0;border-bottom:1px solid var(--rule)}}
@@ -130,7 +134,7 @@ a{color:var(--wine)}
 .ch-head{display:grid;grid-template-columns:120px 1fr;gap:24px;margin-bottom:44px;align-items:start}
 .ch-num{font:italic 600 84px/0.85 "EB Garamond",serif;color:var(--gold-2);opacity:.9}
 .ch-head h2{font:700 clamp(32px,4.4vw,52px)/1.05 "EB Garamond",serif;letter-spacing:-.02em;margin:8px 0 12px}
-.ch-head h2 em{color:var(--wine)}
+.ch-head h2 em{font-style:normal;color:var(--wine)}
 .ch-head p{margin:0;max-width:640px;color:var(--fg-soft);font-size:17px}
 @media (max-width:700px){.ch-head{grid-template-columns:1fr;gap:4px}.ch-num{font-size:60px}}
 
@@ -142,13 +146,13 @@ a{color:var(--wine)}
 .cols p{margin:0 0 14px}
 .cols p:first-child::first-letter{float:left;font:700 4.4em/.82 "EB Garamond",serif;color:var(--wine);padding:6px 10px 0 0}
 blockquote.pull{margin:24px 0 0;padding:22px 0 0;border-top:3px double var(--rule-strong);font:italic 500 clamp(22px,2.4vw,28px)/1.35 "EB Garamond",serif;color:var(--fg)}
-blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono";font-style:normal;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono";font-style:normal;color:var(--muted)}
 .ledger{border:1px solid var(--rule);background:var(--paper)}
 .ledger-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
 .ledger-row:last-child{border-bottom:0}
 .ledger-row>div{padding:14px 16px;font-size:14.5px}
 .ledger-row>div:first-child{border-right:1px solid var(--rule);color:var(--muted);position:relative}
-.ledger-row.head>div{font:600 11px "IBM Plex Mono";letter-spacing:.16em;text-transform:uppercase;color:var(--fg);background:var(--bg-2)}
+.ledger-row.head>div{font:600 11px "IBM Plex Mono";color:var(--fg);background:var(--bg-2)}
 .ledger-row:not(.head)>div:first-child::after{content:"";position:absolute;left:16px;right:16px;top:50%;height:1.5px;background:var(--bad);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
 .ledger.in .ledger-row:not(.head)>div:first-child::after{transform:scaleX(1)}
 .ledger-row>div:last-child{color:var(--fg);font-weight:500}
@@ -157,7 +161,7 @@ blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono"
 /* timeline */
 .tl{position:relative;max-width:860px;margin-left:auto;margin-right:auto}
 .tl::before{content:"";position:absolute;left:31px;top:8px;bottom:8px;width:2px;background:var(--rule)}
-.tl-fill{position:absolute;left:31px;top:8px;width:2px;height:calc(100% - 16px);background:linear-gradient(var(--wine),var(--gold-2));transform:scaleY(0);transform-origin:top;transition:transform 1.8s var(--ease)}
+.tl-fill{position:absolute;left:31px;top:8px;width:2px;height:calc(100% - 16px);background:var(--wine);transform:scaleY(0);transform-origin:top;transition:transform 1.8s var(--ease)}
 .tl.in .tl-fill{transform:scaleY(1)}
 .tl-item{display:grid;grid-template-columns:64px 1fr;gap:22px;padding:0 0 34px;position:relative}
 .tl-dot{width:64px;height:64px;border-radius:50%;background:var(--paper);border:1px solid var(--rule);display:grid;place-items:center;font:italic 600 22px "EB Garamond",serif;color:var(--wine);position:relative;z-index:1;transition:background .25s,color .25s,transform .25s var(--ease)}
@@ -187,7 +191,7 @@ blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono"
 .sheet{padding:26px 28px;min-width:0}
 .sheet-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--rule-strong);padding-bottom:14px}
 .sheet-head h3{font:800 clamp(30px,4vw,44px)/1 "EB Garamond",serif;margin:6px 0 0;letter-spacing:-.02em}
-.verdict{font:600 12px "IBM Plex Mono";letter-spacing:.12em;padding:8px 12px;border:1px solid currentColor}
+.verdict{font:600 12px "IBM Plex Mono";padding:8px 12px;border:1px solid currentColor}
 .swap-out{animation:swOut .22s ease forwards}.swap-in{animation:swIn .55s var(--ease) both}
 @keyframes swOut{to{opacity:0;transform:translateY(-6px)}}
 @keyframes swIn{from{opacity:0;transform:translateY(10px)}}
@@ -210,7 +214,7 @@ blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono"
 .duo>div:first-child{border-right:1px solid var(--rule)}
 @media (max-width:760px){.duo{grid-template-columns:1fr}.duo>div:first-child{border-right:0;border-bottom:1px solid var(--rule)}}
 .duo h4{margin:0 0 10px;font:700 18px "EB Garamond",serif;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.duo h4 span{font:500 11px "IBM Plex Mono";letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.duo h4 span{font:500 11px "IBM Plex Mono";letter-spacing:.1em;color:var(--muted)}
 .cbox{position:relative;height:230px}
 .keys{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
 .keys i{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:-1px}
@@ -218,20 +222,20 @@ blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono"
 .hist h4{margin:0 0 10px;font:700 18px "EB Garamond",serif}
 .tw{overflow:auto;max-height:420px}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
-thead th{position:sticky;top:0;background:var(--paper);text-align:left;font:600 10.5px "IBM Plex Mono";letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:10px 10px;border-bottom:2px solid var(--rule-strong);white-space:nowrap}
+thead th{position:sticky;top:0;background:var(--paper);text-align:left;font:600 10.5px "IBM Plex Mono";color:var(--muted);padding:10px 10px;border-bottom:2px solid var(--rule-strong);white-space:nowrap}
 tbody td{padding:10px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;color:var(--fg-soft)}
 tbody tr{transition:background .2s}
 tbody tr:hover{background:var(--wine-soft)}
 tbody tr.anim{animation:swIn .45s var(--ease) both}
 td.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:13px}
 td.ref{font-family:"IBM Plex Mono",monospace;color:var(--wine);font-weight:600}
-.pend{font:600 10.5px "IBM Plex Mono";letter-spacing:.08em;color:var(--mid);background:var(--mid-soft);padding:3px 7px}
+.pend{font:600 10.5px "IBM Plex Mono";color:var(--mid);background:var(--mid-soft);padding:3px 7px}
 .note{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;margin-top:14px}
 .note svg{width:16px;height:16px;color:var(--gold)}
 
 /* band */
 .band{background:var(--band);color:var(--band-fg);padding:96px 0;position:relative;overflow:hidden}
-.band::before{content:"";position:absolute;right:-200px;top:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(197,154,82,.18),transparent 65%);animation:drift 16s ease-in-out infinite}
+.band::before{display:none;content:"";position:absolute;right:-200px;top:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(197,154,82,.18),transparent 65%);animation:drift 16s ease-in-out infinite}
 @keyframes drift{50%{transform:translate(-80px,60px)}}
 .band .ch-num{color:var(--gold-2)}
 .band .ch-head p{color:#E3C9C6}
@@ -264,13 +268,13 @@ pre.code{margin:0;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.
 @media (max-width:760px){.colo-r{text-align:left}}
 
 /* reveal */
-.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
-.rv-st>*{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .rv-st>*{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .rv-st.in>*{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .rv,.rv-st>*,.figure{opacity:1;transform:none}
+  .js .rv,.js .rv-st>*,.figure{opacity:1;transform:none}
   .cover h1 .w>span,.cover h1 .w>em>span{transform:none}
 }
 /* Polish 18.11.2026: Charles Liu's UI rules + Emil Kowalski motion rules */
@@ -285,7 +289,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs><linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A1F35"/><stop offset="1" stop-color="#C59A52"/></linearGradient></defs>
+  <defs></defs>
   <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -303,7 +307,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
       <nav aria-label="Chapters" style="display:contents">
         <a href="#story">Story</a><a href="#method">Method</a><a href="#scorecard">Scorecard</a><a href="#formulas">Formulas</a>
       </nav>
-      <button class="theme" id="themeBtn" aria-label="Switch colour theme"><svg><use href="#i-moon"/></svg></button>
+      <button class="theme" id="themeBtn" aria-label="Switch colour theme"><svg aria-hidden="true"><use href="#i-moon"/></svg></button>
     </div>
   </div>
 </header>
@@ -311,15 +315,15 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
 <main id="main">
 <section class="cover" id="top">
   <div class="wrap">
-    <span class="label">Procurement analytics · Excel dynamic arrays</span>
+    <span class="label">Procurement analytics with Excel dynamic arrays</span>
     <h1 id="h1" aria-label="Every supplier, measured.">
       <span class="w"><span>Every</span></span> <span class="w"><span>supplier,</span></span> <span class="w"><em><span>measured.</span></em></span>
     </h1>
     <p class="deck">A live scorecard that turns hundreds of purchase lines into a clear verdict on each supplier: what we bought, what we spent, what has arrived, and how long it really takes.</p>
     <div class="byline"><span>Designed &amp; built by <b>Osama Sunaallah</b></span><span>Industrial Engineer, Supply Chain &amp; Planning</span></div>
     <div class="btns">
-      <a class="btn solid" href="#scorecard">Open the scorecard <svg><use href="#i-arrow"/></svg></a>
-      <a class="btn" href="#story">Read the story <svg><use href="#i-down"/></svg></a>
+      <a class="btn solid" href="#scorecard">Open the scorecard <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn" href="#story">Read the story <svg aria-hidden="true"><use href="#i-down"/></svg></a>
     </div>
 
     <figure class="figure" aria-label="Illustration of the scorecard: overall receipt rate and suppliers ranked by delivery time">
@@ -350,7 +354,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
   <div class="wrap">
     <div class="ch-head rv">
       <span class="ch-num" aria-hidden="true">i.</span>
-      <div><span class="label">The story</span><h2>Choosing suppliers on <em>facts</em>, not feelings.</h2></div>
+      <div><h2>Choosing suppliers on <em>facts</em>, not feelings.</h2></div>
     </div>
     <div class="essay">
       <div class="rv">
@@ -378,7 +382,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
   <div class="wrap">
     <div class="ch-head rv">
       <span class="ch-num" aria-hidden="true">ii.</span>
-      <div><span class="label">The method</span><h2>From scattered lines to <em>one verdict</em>.</h2><p>Four steps, all inside one sheet and all driven by formulas.</p></div>
+      <div><h2>From scattered lines to <em>one verdict</em>.</h2><p>Four steps, all inside one sheet and all driven by formulas.</p></div>
     </div>
     <div class="tl" id="tl">
       <div class="tl-fill"></div>
@@ -394,7 +398,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
   <div class="wrap">
     <div class="ch-head rv">
       <span class="ch-num" aria-hidden="true">iii.</span>
-      <div><span class="label">The scorecard</span><h2>See it <em>in action</em>.</h2><p>A web recreation of the sheet. Choose a supplier on the left and the whole scorecard updates, just like the dropdown in Excel.</p></div>
+      <div><h2>See it <em>in action</em>.</h2><p>A web recreation of the sheet. Choose a supplier on the left and the whole scorecard updates, just like the dropdown in Excel.</p></div>
     </div>
     <div class="demo rv">
       <aside class="side" aria-label="Suppliers">
@@ -429,7 +433,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
         </div>
       </div>
     </div>
-    <p class="note"><svg><use href="#i-info"/></svg>All suppliers, items, jobs and prices shown are generated placeholders, not real company data.</p>
+    <p class="note"><svg aria-hidden="true"><use href="#i-info"/></svg>All suppliers, items, jobs and prices shown are generated placeholders, not real company data.</p>
   </div>
 </section>
 
@@ -471,7 +475,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
   <div class="wrap">
     <div class="ch-head rv">
       <span class="ch-num" aria-hidden="true">v.</span>
-      <div><span class="label">Index</span><h2>Skills <em>demonstrated</em>.</h2></div>
+      <div><h2>Skills <em>demonstrated</em>.</h2></div>
     </div>
     <ol class="index rv-st">
       <li>Supplier performance management</li><li>Vendor evaluation &amp; KPIs</li><li>Lead-time analysis</li><li>Spend analysis</li><li>Supplier master data</li><li>Excel dynamic arrays</li><li>LET, FILTER &amp; LAMBDA</li><li>Data modelling</li><li>Procurement analytics</li>
@@ -483,12 +487,12 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
 <footer class="colophon">
   <div class="wrap colo-grid">
     <div>
-      <div class="fine"><svg><use href="#i-shield"/></svg><span><b>Confidentiality.</b> This page is a portfolio recreation. Supplier names, items, people, job numbers and prices are replaced with placeholders such as “Supplier A”, “Item 1” and “PO-1001”.</span></div>
+      <div class="fine"><svg aria-hidden="true"><use href="#i-shield"/></svg><span><b>Confidentiality.</b> This page is a portfolio recreation. Supplier names, items, people, job numbers and prices are replaced with placeholders such as “Supplier A”, “Item 1” and “PO-1001”.</span></div>
     </div>
     <div class="colo-r">
       <p class="serif" style="font-size:20px;color:var(--fg);font-weight:700">Osama Sunaallah</p>
       <p>Industrial Engineer · Supply Chain &amp; Planning</p>
-      <a class="btn" href="https://www.linkedin.com/in/osamasunaallah" target="_blank" rel="noopener" style="margin-top:8px"><svg><use href="#i-in"/></svg>LinkedIn</a>
+      <a class="btn" href="https://www.linkedin.com/in/osamasunaallah" target="_blank" rel="noopener" style="margin-top:8px"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
     </div>
   </div>
 </footer>
@@ -498,7 +502,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root=document.documentElement,themeBtn=document.getElementById('themeBtn');
 const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
-const setIcon=()=>themeBtn.innerHTML=`<svg><use href="#i-${isDark()?'sun':'moon'}"/></svg>`;
+const setIcon=()=>themeBtn.innerHTML=`<svg aria-hidden="true"><use href="#i-${isDark()?'sun':'moon'}"/></svg>`;
 try{const t=localStorage.getItem('ssc-theme');if(t)root.dataset.theme=t}catch(e){}
 setIcon();
 themeBtn.addEventListener('click',()=>{root.dataset.theme=isDark()?'light':'dark';try{localStorage.setItem('ssc-theme',root.dataset.theme)}catch(e){};setIcon();drawCharts()});
@@ -587,8 +591,7 @@ function drawCharts(){
     options:{...base,indexAxis:'y',scales:{x:{grid:{color:grid},border:{display:false},ticks:{callback:v=>v>=1000?(v/1000)+'k':v}},y:{grid:{display:false}}}}}));
   const months=[...Array(6)].map((_,i)=>new Date(today.getFullYear(),today.getMonth()-5+i,1));
   const sp=months.map(m=>cur.filter(l=>l.date.getFullYear()===m.getFullYear()&&l.date.getMonth()===m.getMonth()).reduce((a,l)=>a+l.value,0));
-  const ctx=$('spark').getContext('2d'),gr=ctx.createLinearGradient(0,0,0,70);gr.addColorStop(0,W+'55');gr.addColorStop(1,W+'00');
-  charts.push(new Chart($('spark'),{type:'line',data:{labels:months.map(m=>m.toLocaleDateString('en-GB',{month:'short'})),datasets:[{data:sp,borderColor:W,backgroundColor:gr,fill:true,tension:.45,pointRadius:0,borderWidth:2}]},
+  charts.push(new Chart($('spark'),{type:'line',data:{labels:months.map(m=>m.toLocaleDateString('en-GB',{month:'short'})),datasets:[{data:sp,borderColor:W,fill:false,tension:.45,pointRadius:0,borderWidth:2.5}]},
     options:{...base,plugins:{...base.plugins,tooltip:{...base.plugins.tooltip,callbacks:{label:c=>fmt(c.raw)}}},scales:{x:{display:true,grid:{display:false},border:{display:false},ticks:{font:{size:10}}},y:{display:false,beginAtZero:true}}}}));
 }
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(!root.dataset.theme)drawCharts()});
