@@ -15,8 +15,9 @@
 <link rel="icon" href="thumbnail.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
+<!-- 26.11.2026 (Osama: heroes too slow to appear): font stylesheets load in the background so the first paint never waits for them -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap"></noscript>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap"></noscript>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>document.documentElement.classList.add("js")</script>
 <style>
@@ -222,14 +223,14 @@ blockquote.pull cite{display:block;margin-top:12px;font:500 12px "IBM Plex Mono"
 .hist h4{margin:0 0 10px;font:700 18px "EB Garamond",serif}
 .tw{overflow:auto;max-height:420px}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
-thead th{position:sticky;top:0;background:var(--paper);text-align:left;font:600 10.5px "IBM Plex Mono";color:var(--muted);padding:10px 10px;border-bottom:2px solid var(--rule-strong);white-space:nowrap}
+thead th{position:sticky;top:0;background:var(--paper);text-align:left;font:600 11.5px "IBM Plex Mono";color:var(--muted);padding:10px 10px;border-bottom:2px solid var(--rule-strong);white-space:nowrap}
 tbody td{padding:10px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;color:var(--fg-soft)}
 tbody tr{transition:background .2s}
 tbody tr:hover{background:var(--wine-soft)}
 tbody tr.anim{animation:swIn .45s var(--ease) both}
 td.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:13px}
 td.ref{font-family:"IBM Plex Mono",monospace;color:var(--wine);font-weight:600}
-.pend{font:600 10.5px "IBM Plex Mono";color:var(--mid);background:var(--mid-soft);padding:3px 7px}
+.pend{font:600 11.5px "IBM Plex Mono";color:var(--mid);background:var(--mid-soft);padding:3px 7px}
 .note{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;margin-top:14px}
 .note svg{width:16px;height:16px;color:var(--gold)}
 
@@ -284,6 +285,29 @@ p{text-wrap:pretty}
 sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
 .btn:active,.theme:active{transform:scale(.97);transition-duration:.1s}
 @media (hover:none){.mast-r a:hover::after,.theme:hover,.btn:hover::before,.tl-item:hover .tl-dot{transform:none}}
+/* Apple design pass (26.11.2026, Osama: "apply the apple design skill"). No layout or colour changes:
+   taps answer at once (no double-tap-zoom wait, no grey flash), light/dark switches cross-fade instead of jumping,
+   and the page follows the system settings "Reduce transparency" and "Increase contrast". */
+a,button,summary,label,select,[role="button"]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.35s;animation-timing-function:ease}
+@media (prefers-contrast:more){:root[data-theme="light"],:root:not([data-theme]){--rule:#B79F94}:root[data-theme="dark"]{--rule:#74464F}}
+/* Impeccable pass (26.11.2026, Osama: "apply impeccable"; polish, layout kept): no labels above headings,
+   the skills list loses its 01–09 counters (no sequence) and its hover shift (nothing to click),
+   numbers line up in tables and figures, and the browser's own surfaces use the site's colours */
+.index li::before{content:none}
+.index li:hover{padding-left:0;color:inherit}
+table,td,th,[data-count]{font-variant-numeric:tabular-nums}
+::selection{background:var(--wine);color:#fff}
+:root[data-theme="dark"] ::selection{background:#E58AA0;color:#15080B}
+html{scrollbar-color:color-mix(in srgb,var(--wine) 55%,var(--bg-2)) var(--bg)}
+input,textarea{caret-color:var(--wine)}
+/* 26.11.2026 (Osama: heroes too slow to appear): the cover is complete on the first frame: the headline words
+   no longer rise and the scorecard figure no longer floats in after half a second. */
+.cover h1 .w>span,.cover h1 .w>em>span{transform:none;animation:none}
+.figure{opacity:1;transform:none;animation:none}
+#gv{transition:none}
+.lb{opacity:1;transform:none;animation:none}
+.lb .bar i{animation:none}
 </style>
 </head>
 <body>
@@ -315,7 +339,6 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
 <main id="main">
 <section class="cover" id="top">
   <div class="wrap">
-    <span class="label">Procurement analytics with Excel dynamic arrays</span>
     <h1 id="h1" aria-label="Every supplier, measured.">
       <span class="w"><span>Every</span></span> <span class="w"><span>supplier,</span></span> <span class="w"><em><span>measured.</span></em></span>
     </h1>
@@ -441,7 +464,7 @@ sup{line-height:0;position:relative;vertical-align:baseline;top:-.5em}
   <div class="wrap">
     <div class="ch-head rv">
       <span class="ch-num" aria-hidden="true">iv.</span>
-      <div><span class="label" style="color:#C9A7A6">Under the hood</span><h2 style="color:#fff">Modern Excel, <em>no macros</em>.</h2><p>Every number on the scorecard comes from dynamic array formulas, recalculated the moment a PO is added or received.</p></div>
+      <div><h2 style="color:#fff">Modern Excel, <em>no macros</em>.</h2><p>Every number on the scorecard comes from dynamic array formulas, recalculated the moment a PO is added or received.</p></div>
     </div>
     <div class="code-wrap">
 <pre class="code rv" aria-label="Simplified Excel formulas"><span class="c">// I · Spend split by currency → "SAR 48,210 + USD 1,150"</span>
@@ -505,7 +528,7 @@ const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(pre
 const setIcon=()=>themeBtn.innerHTML=`<svg aria-hidden="true"><use href="#i-${isDark()?'sun':'moon'}"/></svg>`;
 try{const t=localStorage.getItem('ssc-theme');if(t)root.dataset.theme=t}catch(e){}
 setIcon();
-themeBtn.addEventListener('click',()=>{root.dataset.theme=isDark()?'light':'dark';try{localStorage.setItem('ssc-theme',root.dataset.theme)}catch(e){};setIcon();drawCharts()});
+themeBtn.addEventListener('click',()=>{const go=()=>{root.dataset.theme=isDark()?'light':'dark';try{localStorage.setItem('ssc-theme',root.dataset.theme)}catch(e){};setIcon();drawCharts()};document.startViewTransition?document.startViewTransition(go):go()});
 const mast=document.getElementById('mast');addEventListener('scroll',()=>mast.classList.toggle('scrolled',scrollY>10),{passive:true});
 const links=[...document.querySelectorAll('.mast-r a')];
 const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
@@ -542,8 +565,9 @@ const band=d=>d<=7?'fast':d<=14?'mid':'slow';
 
 /* ---------- cover figure ---------- */
 const allR=lines.filter(l=>l.recv).length/lines.length;
+/* 26.11.2026 (Osama: heroes too slow): the cover figure is complete on arrival: ring, percentage and bars are final at once */
 setTimeout(()=>{document.getElementById('gv').style.strokeDashoffset=452*(1-allR);const gt=document.getElementById('gt');
-  if(reduce){gt.textContent=Math.round(allR*100)+'%';return}const t0=performance.now();const st=t=>{const p=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-p,4);gt.textContent=Math.round(allR*100*e)+'%';if(p<1)requestAnimationFrame(st)};requestAnimationFrame(st)},reduce?0:700);
+  gt.textContent=Math.round(allR*100)+'%'},0);
 const top=stats.slice().sort((a,b)=>a.avg-b.avg).slice(0,5),mx=Math.max(...stats.map(s=>s.avg));
 document.getElementById('lead').innerHTML=top.map((s,i)=>`<div class="lb" style="animation-delay:${.8+i*.1}s"><span class="n">0${i+1}</span><span class="nm">${s.s}</span><span class="bar"><i style="width:${Math.max(8,s.avg/mx*100)}%;animation-delay:${1+i*.1}s"></i></span><span class="d">${Math.round(s.avg)}d</span></div>`).join('');
 
